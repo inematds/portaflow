@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PortaFlow — Máquina de vendas B2B de portas no WhatsApp</title>
+<meta name="description" content="Projeto de máquina de vendas automática para portas internas brancas: WhatsApp + IA qualifica o lead, motor determinístico calcula o orçamento, Pix fecha o pedido e o Telegram avisa o dono. Documentação, pesquisa validada e plano de execução em 8 fases.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;margin-bottom:26px}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🚪</span> PortaFlow</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">O que é</a>
+    <a class="sec" href="#fluxo">Como funciona</a>
+    <a class="sec" href="#pre">Pré-requisitos</a>
+    <a class="sec" href="#guia">Guia de uso</a>
+    <a class="sec" href="#exemplos">Exemplos</a>
+    <a class="sec" href="#roadmap">Roadmap</a>
+    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/portaflow" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Vendas · Automação · WhatsApp</span>
+      <h1>A máquina que vende <span class="amb">portas</span> enquanto você toca a fábrica.</h1>
+      <p class="lead">Lead entra pelo WhatsApp, a IA qualifica, um motor determinístico calcula o orçamento no catálogo real, o Pix fecha o pedido — e o Telegram só te chama quando precisa de gente.</p>
+      <div class="cta">
+        <a class="btn" href="#guia">Começar o guia</a>
+        <a class="btn ghost" href="https://github.com/inematds/portaflow" target="_blank" rel="noopener">Ver no GitHub</a>
+      </div>
+    </div>
+    <figure><img src="assets/hero.png" alt="PortaFlow — máquina de vendas de portas internas brancas"></figure>
+  </div>
+</header>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">O que é</span>
+  <h2>Um projeto de máquina de vendas B2B, documentado antes de ser codado</h2>
+  <p class="sub">O PortaFlow vende portas internas brancas para <strong>lojas e revendas</strong>. Hoje este repositório contém a fase que decide o sucesso do resto: o diagnóstico do negócio, a pesquisa que valida cada escolha técnica contra fontes primárias, e o plano de execução em 8 fases pronto para um agente implementar. O código vem depois — e vem guiado.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🚪 Preço nunca sai da IA</h3><p>O modelo extrai os dados e narra o resultado. Quem calcula é um motor determinístico ligado ao catálogo real, com orçamento versionado, ID único e validade — porque no CDC uma oferta precisa vincula o negócio.</p></div>
+    <div class="card"><h3>🚪 Decisão fundamentada, não achismo</h3><p>Sete decisões de arquitetura sustentadas por documentação oficial da Meta, Anthropic, Google e Asaas, mais casos reais de produção — incluindo os incidentes que os outros já pagaram para aprender.</p></div>
+    <div class="card"><h3>🚪 Multi-tenant desde a primeira linha</h3><p>A arquitetura nasce com separação por cliente e adaptador de canal trocável. Começa como sistema próprio de uma operação; vira SaaS para várias lojas sem reescrita.</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Como funciona</span>
+  <h2>Do anúncio ao pedido pago</h2>
+  <p class="sub">O funil desenhado nos documentos, com os pontos onde o sistema é rígido de propósito: a origem do lead é capturada na primeira mensagem (depois é irrecuperável) e todo valor em reais passa pelo motor de orçamento antes de chegar ao cliente.</p>
+  <div class="flow">
+    <span>Anúncio / Busca</span><span class="arr">→</span>
+    <span>WhatsApp</span><span class="arr">→</span>
+    <span>IA qualifica</span><span class="arr">→</span>
+    <span>Motor de orçamento</span><span class="arr">→</span>
+    <span>Proposta</span><span class="arr">→</span>
+    <span>Pix (sinal)</span><span class="arr">→</span>
+    <span>Pedido</span>
+  </div>
+  <div class="grid g4" style="margin-top:28px">
+    <div class="card"><span class="num">1</span><h3>Captação</h3><p>Google Search e anúncios clique-para-WhatsApp. A campanha é otimizada pelo evento de <em>lead qualificado</em> com valor proxy — não por venda, que em ticket alto não tem volume para treinar o algoritmo.</p></div>
+    <div class="card"><span class="num">2</span><h3>Qualificação</h3><p>A IA identifica o perfil (loja, revenda, construtor), a cidade, o mix de portas, as medidas e o prazo — em poucas trocas, porque a partir de outubro de 2026 cada mensagem tem custo na API oficial.</p></div>
+    <div class="card"><span class="num">3</span><h3>Orçamento</h3><p>Itens, perfil, volume e CEP entram numa função pura coberta por testes; sai um orçamento com ID, validade e a versão da tabela de preço usada. Item fora do catálogo não recebe número — nem faixa.</p></div>
+    <div class="card"><span class="num">4</span><h3>Fechamento</h3><p>Link de cobrança com Pix para o sinal e segunda cobrança para o saldo, amarrados ao orçamento por referência externa — é isso que liga o pagamento confirmado de volta ao anúncio que gerou o lead.</p></div>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Pré-requisitos</span>
+  <h2>O que precisa existir antes de codar</h2>
+  <p class="sub">As fases 0 e 1 do plano rodam com o que já está aqui. As demais dependem de dados e contas que o dono da operação fornece — o repositório traz o checklist completo em <code>doc/lista_dados_necessarios.md</code>.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Catálogo real</h3><p>Export do sistema de catálogo com produtos, medidas, acabamentos, composição do kit e tabela de preço por volume. É o que destrava o motor de orçamento (fase 2).</p><pre><span class="c"># qualquer formato serve</span>
+<span class="k">doc/</span>catalogo_exemplo.csv</pre></div>
+    <div class="card"><h3>Número dedicado</h3><p>Um chip só para o robô — nunca o número principal da empresa. O canal começa em Evolution API e migra para a API oficial da Meta quando o volume justificar.</p><pre><span class="c"># sobe o canal + banco + fila</span>
+<span class="k">docker compose up</span> -d</pre></div>
+    <div class="card"><h3>Contas de serviço</h3><p>Bot do Telegram para a operação interna, conta em gateway de pagamento para gerar cobrança Pix por API, e a chave do modelo de linguagem.</p><pre><span class="c"># segredos ficam fora do repo</span>
+<span class="k">cp</span> .env.example .env</pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guia de uso · passo a passo</span>
+  <h2>Como usar este repositório</h2>
+  <p class="sub">O repositório é feito para ser executado por um agente de código (Claude Sonnet ou Opus) fase a fase, com revisão humana entre elas. Este é o caminho do zero ao MVP.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Clone o projeto</h3>
+    <p>Todo o material de decisão está versionado: documentos de visão, validação da pesquisa e o plano mestre.</p>
+<pre><span class="k">git clone</span> <span class="s">git@github.com:inematds/portaflow.git</span>
+<span class="k">cd</span> portaflow</pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Leia na ordem certa</h3>
+    <p>Comece pelo diagnóstico do negócio, passe pela validação da pesquisa (é onde as decisões estão justificadas com fontes) e termine no plano de execução.</p>
+<pre><span class="c"># 1. o negócio e o funil pretendido</span>
+doc/diagnostico_vendas_portas_internas_brancas.md
+doc/maquina_captacao_portas_visao_inicial.md
+doc/visao_geral_maquina_vendas_portas.md
+
+<span class="c"># 2. as 7 decisões com fontes primárias</span>
+doc/validacao_pesquisa.md
+
+<span class="c"># 3. o plano mestre em 8 fases</span>
+PLANO.md</pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Preencha o checklist de dados</h3>
+    <p>O dono da operação responde o que só ele sabe: catálogo, tabela de preço por volume, alçada de desconto da IA, região atendida e prazos. Sem os itens A a C, a fase 2 fica bloqueada de propósito.</p>
+<pre><span class="k">$EDITOR</span> doc/lista_dados_necessarios.md  <span class="c"># marque os itens conforme entregar</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Abra uma sessão com o agente apontando para o plano</h3>
+    <p>O <code>PLANO.md</code> é autossuficiente: traz arquitetura, modelo de dados, contratos entre módulos, restrições globais e critérios de aceite por fase.</p>
+<pre><span class="k">claude</span>   <span class="c"># na pasta do projeto</span>
+<span class="c"># então peça: "leia PLANO.md e execute a Fase 0"</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Execute fase a fase, com teste fechando o loop</h3>
+    <p>Cada fase vira um plano detalhado em <code>doc/planos/</code> antes de virar código, é implementada em ciclo de teste-primeiro e só é dada como pronta com a suíte verde.</p>
+<pre><span class="k">pytest</span> -q          <span class="c"># verde antes de qualquer "pronto"</span>
+<span class="k">git commit</span> -m <span class="s">"feat: ..."</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">6</div><div>
+    <h3>Valide o MVP na conversa real</h3>
+    <p>O critério de pronto do MVP, ao fim da fase 4: um lead real chega pelo WhatsApp, é qualificado, recebe orçamento correto calculado do catálogo, paga o sinal por Pix — e o dono acompanha tudo pelo Telegram.</p>
+<pre><span class="c"># no bot de operação</span>
+<span class="k">/resumo</span>       <span class="c"># funil do dia: leads, qualificados, orçamentos, vendas</span>
+<span class="k">/assumir</span> 42   <span class="c"># humano assume a conversa; o bot pausa</span></pre>
+  </div></div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Exemplos</span>
+  <h2>A visão que originou o projeto</h2>
+  <p class="sub">Os infográficos que traduzem o funil pretendido — da captação de tráfego ao pedido confirmado, e o painel de acompanhamento que o sistema precisa alimentar.</p>
+  <div class="ex">
+    <figure><img src="assets/ex1.jpg" alt="Infográfico da máquina de captação de leads"><figcaption>Máquina de captação: fontes de tráfego convergindo para um funil único de captura, qualificação e atendimento automático.</figcaption></figure>
+    <figure><img src="assets/ex2.jpg" alt="Infográfico da máquina de vendas automática"><figcaption>Máquina de vendas: as seis etapas da captação ao pós-venda, com o painel de controle que mede lead até faturamento.</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Roadmap</span>
+  <h2>As 8 fases do plano</h2>
+  <p class="sub">Ordem de execução com dependências explícitas. As fases 0 e 1 não dependem do catálogo e podem começar imediatamente.</p>
+  <div class="phase"><div class="tag">Fase 0</div><div class="d"><strong>Fundação</strong><span>Repositório, containers, banco, migrations, configuração e suíte de testes rodando.</span></div></div>
+  <div class="phase"><div class="tag">Fase 1</div><div class="d"><strong>Canal e operação</strong><span>WhatsApp via adaptador de canal, webhook com deduplicação e agrupamento de mensagens, captura da origem do lead e bot de Telegram com comandos de operação.</span></div></div>
+  <div class="phase"><div class="tag">Fase 2</div><div class="d"><strong>Catálogo e orçamento</strong><span>Importação do catálogo real e o motor de preço determinístico, coberto por testes de referência validados pelo dono da operação.</span></div></div>
+  <div class="phase"><div class="tag">Fase 3</div><div class="d"><strong>Agente vendedor</strong><span>Extração de dados com validação de faixas, ferramentas de consulta, barreiras contra valor inventado e avaliação automatizada de conversas simuladas.</span></div></div>
+  <div class="phase"><div class="tag">Fase 4</div><div class="d"><strong>Fechamento e pagamento</strong><span>Cobrança Pix para sinal e saldo, confirmação por webhook idempotente e registro do pedido. Fim do MVP.</span></div></div>
+  <div class="phase"><div class="tag">Fase 5</div><div class="d"><strong>Follow-up e CRM</strong><span>Cadência de retomada que para quando o lead responde, classificação de motivos de perda e métricas do funil até margem.</span></div></div>
+  <div class="phase"><div class="tag">Fase 6</div><div class="d"><strong>Captação e atribuição</strong><span>Landing page com código de rastreio, envio de conversões para Meta e Google, e otimização das campanhas pelo lead qualificado.</span></div></div>
+  <div class="phase"><div class="tag">Fase 7</div><div class="d"><strong>API oficial</strong><span>Migração do canal para a plataforma oficial da Meta quando o volume, a receita ou um sinal de restrição no número dispararem o gatilho.</span></div></div>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Python · FastAPI</div><div class="pill">Postgres · Redis</div><div class="pill">WhatsApp · Telegram</div><div class="pill">Claude</div>
+    <p style="margin-top:18px">PortaFlow · projeto de pesquisa e automação de vendas ·
+      <a href="https://github.com/inematds/portaflow">inematds/portaflow</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='portaflow-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>
