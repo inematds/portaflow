@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>PortaFlow — B2B Door Sales Machine on WhatsApp</title>
+<meta content="Automated sales machine project for white interior doors: WhatsApp + AI qualifies the lead, a deterministic engine calculates the quote, Pix closes the order, and Telegram alerts the owner. Documentation, validated research, and an 8-phase execution plan." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;margin-bottom:26px}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+<link href="https://inematds.github.io/portaflow/guia/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/portaflow/guia/en/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/portaflow/guia/es/" hreflang="es" rel="alternate"/></head>
+<body><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="./" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../es/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<nav><div class="wrap">
+<a class="brand" href="#top"><span class="emoji">🚪</span> PortaFlow</a>
+<span class="sep">|</span>
+<span class="clubpro">
+<a class="inema" href="https://inema.club" rel="noopener" target="_blank">INEMA.CLUB</a>
+<span class="sep">-</span>
+<a class="pro" href="https://inema.pro" rel="noopener" target="_blank">PRO</a>
+</span>
+<div class="links">
+<a class="sec" href="#oque">What it is</a>
+<a class="sec" href="#fluxo">How it works</a>
+<a class="sec" href="#pre">Prerequisites</a>
+<a class="sec" href="#guia">User guide</a>
+<a class="sec" href="#exemplos">Examples</a>
+<a class="sec" href="#roadmap">Roadmap</a>
+<button aria-label="Toggle theme" class="tgl" id="themeToggle" title="Toggle theme">🌙</button>
+<a class="btn" href="https://github.com/inematds/portaflow" rel="noopener" target="_blank">GitHub</a>
+</div>
+</div></nav>
+<header class="hero" id="top">
+<div class="glow"></div>
+<div class="wrap">
+<div>
+<span class="chip">Sales · Automation · WhatsApp</span>
+<h1>The sales engine <span class="amb">doors</span> while you run the factory.</h1>
+<p class="lead">A lead comes in through WhatsApp, AI qualifies them, a deterministic engine calculates the quote from the real catalog, Pix closes the order—and Telegram only alerts you when a person is needed.</p>
+<div class="cta">
+<a class="btn" href="#guia">Start the guide</a>
+<a class="btn ghost" href="https://github.com/inematds/portaflow" rel="noopener" target="_blank">View on GitHub</a>
+</div>
+</div>
+<figure><img alt="PortaFlow — sales machine for white interior doors" src="../assets/hero.png"/></figure>
+</div>
+</header>
+<section id="oque"><div class="wrap">
+<span class="chip">What it is</span>
+<h2>A B2B sales machine project, documented before a line of code was written</h2>
+<p class="sub">PortaFlow sells white interior doors to <strong>stores and resellers</strong>. Today, this repository contains the phase that determines the success of everything else: the business diagnosis, the research that validates each technical choice against primary sources, and the 8-phase execution plan ready for an agent to implement. The code comes later—and it will be guided.</p>
+<div class="grid g3">
+<div class="card"><h3>🚪 Price never comes from AI</h3><p>The model extracts the data and describes the result. A deterministic engine connected to the real catalog does the calculation, with a versioned quote, unique ID, and expiration date—because under the CDC, a binding offer creates an obligation.</p></div>
+<div class="card"><h3>🚪 Evidence-based decisions, not guesswork</h3><p>Seven architecture decisions backed by official documentation from Meta, Anthropic, Google, and Asaas, plus real production cases—including incidents others have already paid to learn from.</p></div>
+<div class="card"><h3>🚪 Multi-tenant from the first line</h3><p>The architecture is built with separation by client and a swappable channel adapter. It starts as a custom system for one operation and can become SaaS for multiple stores without a rewrite.</p></div>
+</div>
+</div></section>
+<section id="fluxo"><div class="wrap">
+<span class="chip">How it works</span>
+<h2>From ad to paid order</h2>
+<p class="sub">The funnel outlined in the documents, with the points where the system is intentionally strict: the lead source is captured in the first message (it can't be recovered later), and every amount in reais goes through the quote engine before reaching the customer.</p>
+<div class="flow">
+<span>Ad / Search</span><span class="arr">→</span>
+<span>WhatsApp</span><span class="arr">→</span>
+<span>AI qualifies</span><span class="arr">→</span>
+<span>Quote engine</span><span class="arr">→</span>
+<span>Proposal</span><span class="arr">→</span>
+<span>Pix (deposit)</span><span class="arr">→</span>
+<span>Order</span>
+</div>
+<div class="grid g4" style="margin-top:28px">
+<div class="card"><span class="num">1</span><h3>Lead generation</h3><p>Google Search and click-to-WhatsApp ads. The campaign is optimized for the event of <em>qualified lead</em> using proxy value—not sales, which at a high ticket price don’t provide enough volume to train the algorithm.</p></div>
+<div class="card"><span class="num">2</span><h3>Qualification</h3><p>The AI identifies the profile (store, reseller, builder), city, door mix, dimensions, and timeline—in just a few exchanges, because starting in October 2026, every message has a cost on the official API.</p></div>
+<div class="card"><span class="num">3</span><h3>Quote</h3><p>Items, profile, volume, and ZIP code go into a pure function covered by tests; a quote comes out with an ID, expiration date, and the version of the price list used. Items outside the catalog don't get a number—not even a range.</p></div>
+<div class="card"><span class="num">4</span><h3>Closing</h3><p>A Pix payment link for the deposit and a second charge for the balance, both tied to the quote by an external reference—that's what links the confirmed payment back to the ad that generated the lead.</p></div>
+</div>
+</div></section>
+<section id="pre"><div class="wrap">
+<span class="chip">Prerequisites</span>
+<h2>What needs to be in place before coding</h2>
+<p class="sub">Phases 0 and 1 of the plan can be completed with what's already here. The remaining phases depend on data and accounts provided by the operation's owner—the repository includes the complete checklist in <code>doc/lista_dados_necessarios.md</code>.</p>
+<div class="grid g3">
+<div class="card"><h3>Actual catalog</h3><p>Export from the catalog system with products, dimensions, finishes, kit composition, and volume-based pricing. This unlocks the quote engine (phase 2).</p><pre><span class="c"># any format works</span>
+<span class="k">doc/</span>catalogo_exemplo.csv</pre></div>
+<div class="card"><h3>Dedicated number</h3><p>One SIM card just for the bot—never the company’s main number. The channel starts with Evolution API and migrates to Meta’s official API when volume justifies it.</p><pre><span class="c"># brings up the channel + database + queue</span>
+<span class="k">docker compose up</span> -d</pre></div>
+<div class="card"><h3>Service accounts</h3><p>A Telegram bot for internal operations, an account with a payment gateway to generate Pix charges via API, and the language model key.</p><pre><span class="c"># secrets stay outside the repo</span>
+<span class="k">cp</span> .env.example .env</pre></div>
+</div>
+</div></section>
+<section id="guia"><div class="wrap">
+<span class="chip">User guide · step by step</span>
+<h2>How to use this repository</h2>
+<p class="sub">The repository is designed to be run phase by phase by a coding agent (Claude Sonnet or Opus), with human review between phases. This is the path from zero to MVP.</p>
+<div class="step"><div class="b">1</div><div>
+<h3>Clone the project</h3>
+<p>All decision materials are version controlled: vision documents, research validation, and the master plan.</p>
+<pre><span class="k">git clone</span> <span class="s">git@github.com:inematds/portaflow.git</span>
+<span class="k">cd</span> portaflow</pre>
+</div></div>
+<div class="step"><div class="b">2</div><div>
+<h3>Read in the right order</h3>
+<p>Start with the business diagnosis, move on to research validation (where the decisions are justified with sources), and finish with the execution plan.</p>
+<pre><span class="c"># 1. the business and intended funnel</span>
+doc/diagnostico_vendas_portas_internas_brancas.md
+doc/maquina_captacao_portas_visao_inicial.md
+doc/visao_geral_maquina_vendas_portas.md
+
+<span class="c"># 2. the 7 decisions backed by primary sources</span>
+doc/validacao_pesquisa.md
+
+<span class="c"># 3. the master plan in 8 phases</span>
+PLANO.md</pre>
+</div></div>
+<div class="step"><div class="b">3</div><div>
+<h3>Complete the data checklist</h3>
+<p>The operations owner provides what only they know: catalog, volume-based price list, AI discount authority, service area, and lead times. Without items A to C, phase 2 is intentionally blocked.</p>
+<pre><span class="k">$EDITOR</span> doc/lista_dados_necessarios.md  <span class="c"># check off items as you deliver them</span></pre>
+</div></div>
+<div class="step"><div class="b">4</div><div>
+<h3>Start a session with the agent pointed at the plan</h3>
+<p>O <code>PLANO.md</code> is self-contained: it includes architecture, data model, contracts between modules, global constraints, and acceptance criteria for each phase.</p>
+<pre><span class="k">claude</span>   <span class="c"># in the project folder</span>
+<span class="c"># then ask: "read PLANO.md and execute Phase 0"</span></pre>
+</div></div>
+<div class="step"><div class="b">5</div><div>
+<h3>Execute one phase at a time, with a test closing the loop</h3>
+<p>Each phase becomes a detailed plan in <code>doc/planos/</code> before it becomes code, it is implemented in a test-first cycle and only considered ready when the suite is green.</p>
+<pre><span class="k">pytest</span> -q          <span class="c"># green before anything is called "done"</span>
+<span class="k">git commit</span> -m <span class="s">"feat: ..."</span></pre>
+</div></div>
+<div class="step"><div class="b">6</div><div>
+<h3>Validate the MVP in real conversations</h3>
+<p>The MVP's definition of done, at the end of phase 4: a real lead comes in through WhatsApp, is qualified, receives an accurate quote calculated from the catalog, pays the deposit via Pix—and the owner tracks everything through Telegram.</p>
+<pre><span class="c"># in the operations bot</span>
+<span class="k">/resumo</span>       <span class="c"># daily funnel: leads, qualified leads, quotes, sales</span>
+<span class="k">/assumir</span> 42   <span class="c"># a human takes over the conversation; the bot pauses</span></pre>
+</div></div>
+</div></section>
+<section id="exemplos"><div class="wrap">
+<span class="chip">Examples</span>
+<h2>The vision behind the project</h2>
+<p class="sub">Infographics illustrating the intended funnel—from traffic generation to confirmed order—and the tracking dashboard the system needs to populate.</p>
+<div class="ex">
+<figure><img alt="Infographic of the lead generation machine" src="../assets/ex1.jpg"/><figcaption>Lead generation machine: traffic sources converging on a single funnel for capture, qualification, and automated service.</figcaption></figure>
+<figure><img alt="Infographic of the automated sales machine" src="../assets/ex2.jpg"/><figcaption>Sales machine: the six stages from lead generation to after-sales, with a dashboard that tracks leads through to revenue.</figcaption></figure>
+</div>
+</div></section>
+<section id="roadmap"><div class="wrap">
+<span class="chip">Roadmap</span>
+<h2>The plan's 8 phases</h2>
+<p class="sub">Execution order with explicit dependencies. Phases 0 and 1 don't depend on the catalog and can start immediately.</p>
+<div class="phase"><div class="tag">Phase 0</div><div class="d"><strong>Foundation</strong><span>Repository, containers, database, migrations, configuration, and test suite running.</span></div></div>
+<div class="phase"><div class="tag">Phase 1</div><div class="d"><strong>Channel and operations</strong><span>WhatsApp via a channel adapter, webhook with deduplication and message grouping, lead source tracking, and a Telegram bot with operational commands.</span></div></div>
+<div class="phase"><div class="tag">Phase 2</div><div class="d"><strong>Catalog and quote</strong><span>Import of the real catalog and the deterministic pricing engine, covered by reference tests validated by the operations owner.</span></div></div>
+<div class="phase"><div class="tag">Phase 3</div><div class="d"><strong>Sales agent</strong><span>Data extraction with range validation, lookup tools, safeguards against invented values, and automated evaluation of simulated conversations.</span></div></div>
+<div class="phase"><div class="tag">Phase 4</div><div class="d"><strong>Closing and payment</strong><span>Pix payments for the deposit and balance, confirmation via an idempotent webhook, and order recording. MVP complete.</span></div></div>
+<div class="phase"><div class="tag">Phase 5</div><div class="d"><strong>Follow-up and CRM</strong><span>A follow-up cadence that stops when the lead replies, classification of loss reasons, and funnel metrics through to margin.</span></div></div>
+<div class="phase"><div class="tag">Phase 6</div><div class="d"><strong>Lead generation and attribution</strong><span>Landing page with tracking code, conversion reporting to Meta and Google, and campaign optimization for qualified leads.</span></div></div>
+<div class="phase"><div class="tag">Phase 7</div><div class="d"><strong>Official API</strong><span>Migration of the channel to Meta's official platform when volume, revenue, or a sign of number restrictions triggers the threshold.</span></div></div>
+</div></section>
+<footer>
+<div class="wrap">
+<div class="pill">Python · FastAPI</div><div class="pill">Postgres · Redis</div><div class="pill">WhatsApp · Telegram</div><div class="pill">Claude</div>
+<p style="margin-top:18px">PortaFlow · sales automation research project ·
+      <a href="https://github.com/inematds/portaflow">inematds/portaflow</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
+  (function(){
+    var KEY='portaflow-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 # 🚪 PortaFlow
 
+**🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
+
 Máquina de vendas B2B de portas internas brancas via WhatsApp: lead entra, a IA qualifica, um motor
 determinístico calcula o orçamento no catálogo real, o Pix fecha o pedido e o Telegram avisa o dono
 quando precisa de gente.
